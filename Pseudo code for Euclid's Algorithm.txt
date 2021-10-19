@@ -1,0 +1,24 @@
+#pseudo code:
+when a and b are integers and a > b,
+q is the greatest number of times b fit into a
+r is the remainder when b divides a
+
+e.g. a = 84, b = 24
+
+84 / 24 = 3.5
+so q = 3
+
+r = a - b*q
+so r = 84 - 24*3 = 84 - 72 = 12
+
+all in all, 84 = 24*3 + 12
+
+since r !=0 , we carry on and find gcd(b,r)
+
+24 = 12*q + r
+
+q = floor(b/r) = floor(24/12) = 2
+r = 24 - 12*2 = 0
+
+so gcd(a,b) is the value of b in the penultimate iteration
+
