@@ -13,5 +13,13 @@ def kasiski_method(pos_values=None):
         input_strings = input_raw.split(",")
         input_ints = [int(element) for element in input_strings]
         pos_values = input_ints
+
+    # Step (3)
+    diffs_list = []
+    for i in range(len(pos_values)):
+        for j in range(len(pos_values)-1,i,-1):
+            print(j,i)
+            diffs_list.append(abs(pos_values[j]-pos_values[i]))
+    
 kasiski_method(pos_values=[1,15,89,201,289,320])
 #kasiski_method()
