@@ -7,6 +7,13 @@
 # (5) Calculate the frequencies of each GCD
 # (6) The most common GCD will likely be the keyword length
 
+# Assume steps (1) and (2) are done
+
+def gcd(a, b):
+  while b!=0:
+    a, b = b, a % b
+  return a
+
 def kasiski_method(pos_values=None):
     if not pos_values:
         input_raw = input("Enter position values: ")
@@ -21,5 +28,13 @@ def kasiski_method(pos_values=None):
             print(j,i)
             diffs_list.append(abs(pos_values[j]-pos_values[i]))
     
+    # Step (4)
+    gcds_list = []
+    for i in range(len(diffs_list)):
+        for j in range(len(diffs_list)-1,i,-1):
+            gcds_list.append(gcd(diffs_list[j],diffs_list[i]))
+
+
+
 kasiski_method(pos_values=[1,15,89,201,289,320])
 #kasiski_method()
