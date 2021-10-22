@@ -28,14 +28,15 @@ def kasiski_method(pos_values=None):
     diffs_list = []
     for i in range(len(pos_values)):
         for j in range(len(pos_values)-1,i,-1):
-            print(j,i)
             diffs_list.append(abs(pos_values[j]-pos_values[i]))
+    #print(diffs_list)
     
     # Step (4)
     gcds_list = []
     for i in range(len(diffs_list)):
         for j in range(len(diffs_list)-1,i,-1):
             gcds_list.append(gcd(diffs_list[j],diffs_list[i]))
+    #print(gcds_list)
 
     # Step (5)
     gcd_counter = Counter(gcds_list)
@@ -44,6 +45,8 @@ def kasiski_method(pos_values=None):
     for key, value in counter_sorted_by_value:
         if value > 1:
             significant_gcds.append((key, value))
+    #print(counter_sorted_by_value)
+
     # Display results as table
     all_gcds = [key for key, value in significant_gcds]
     all_gcds.insert(0,"GCDs")
