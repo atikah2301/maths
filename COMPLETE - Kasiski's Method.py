@@ -41,6 +41,13 @@ def kasiski_method(pos_values=None):
     for key, value in counter_sorted_by_value:
         if value > 1:
             significant_gcds.append((key, value))
+    # Display results as table
+    all_gcds = [key for key, value in significant_gcds]
+    all_gcds.insert(0,"GCDs")
+    all_frequencies = [value for key, value in significant_gcds]
+    all_frequencies.insert(0,"Frequency")
+    table = tabulate([all_gcds, all_frequencies])
+    print(table)
 
 
 kasiski_method(pos_values=[1,15,89,201,289,320])
