@@ -9,6 +9,9 @@
 
 # Assume steps (1) and (2) are done
 
+from collections import Counter
+from tabulate import tabulate
+
 def gcd(a, b):
   while b!=0:
     a, b = b, a % b
