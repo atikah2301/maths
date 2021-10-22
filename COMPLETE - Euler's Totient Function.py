@@ -12,7 +12,7 @@ z = [] # list of numbers no greater than n
 g = [] # list of GCDs corresponding to z[i]
 t = [] # list of z[i] with corresponding g[i]==1 i.e. totients
 
-
+# Create a list of all 0<i<n
 i = 1
 while i <= n:
     z.append(i)
@@ -20,11 +20,13 @@ while i <= n:
 
 i = 0
 while i < n:
-    a = n # assign n to a dummy variable
-    b = z[i] # assign each z[i] to a dummy variable
+    a = n 
+    b = z[i]
+    # Calculate gcd(i,n), then add to list g
     while b != 0:
         a , b = b, a%b
     g.append(a)
+    # if the gcd=1, then add to list t, of totients
     if a == 1:
         t.append(z[i])
     i += 1
