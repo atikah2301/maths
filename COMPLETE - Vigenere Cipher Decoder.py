@@ -192,3 +192,47 @@ def decode_vigenere_ciphertext(substrings: list[str], key: str) -> str:
     return plaintext.lower()
 
 
+# Run this code to see a table
+# of all the most common digrams and trigrams, with their frequencies
+with open('cipher_text.txt') as file:
+    ciphertext = file.read().replace('\n', '').replace(' ', '')
+
+    digrams = get_ngrams(ciphertext, n=2)
+    digram_counter = Counter(digrams)
+    # tabulate_frequencies(digram_counter, "Digrams", threshold=6)
+
+    trigrams = get_ngrams(ciphertext, n=3)
+    trigram_counter = Counter(trigrams)
+    # tabulate_frequencies(trigram_counter, "Trigrams", threshold=2)
+
+# Run this code on different trigrams and digrams until you can guess a keyword length
+with open('cipher_text.txt', 'r') as file:
+    ciphertext = file.read().replace('\n', '').replace(' ', '')
+    ngram = "QL"
+    positions = find_positions(ciphertext, ngram)
+    print(positions)
+    find_key_length(pos_values=positions)
+
+# Run this code to split the ciphertext
+# into its constituent caesar shift ciphertexts, based on guessed keyword length
+# then find the encryption / decryption keys using chi-squared stats
+# finally, retrieve the plaintext through decryption
+with open('cipher_text.txt', 'r') as file:
+    ciphertext = file.read().replace('\n', '').replace(' ', '')
+    key_length = 14
+    substrings = get_caesar_substrings(ciphertext, key_length)
+
+    # Tabluate the letter frequencies for each substring
+    # for i in range(len(substrings)):
+    #     substrings[i] = substrings[i].strip()
+    #     letters = get_ngrams(substrings[i], n=1)
+    #     letter_frequency = Counter(letters)
+    #     tabulate_frequencies(letter_frequency, f"Caesar Shift {i + 1}", threshold=1)
+
+    key = get_decryption_key(substrings)
+    print(key)
+    inv_key = get_encryption_key(key)
+    print(inv_key)
+
+    print(decode_vigenere_ciphertext(substrings, inv_key))
+
