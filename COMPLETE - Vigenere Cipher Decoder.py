@@ -22,3 +22,12 @@ def gcd(a: int, b: int) -> int:
     while b != 0:
         a, b = b, a % b
     return a
+
+
+def get_ngrams(text: int, n=1) -> list[str]:
+    # Step (1) - to find digrams and trigrams
+    # Step (8) - to help find letter frequencies
+    for i in range(len(text)):
+        yield text[i: i + n]
+
+
