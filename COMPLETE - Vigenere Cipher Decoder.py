@@ -77,3 +77,20 @@ def find_key_length(pos_values: list[int]) -> None:
     tabulate_frequencies(gcd_counter, "GCDs", threshold=4)
 
 
+def get_caesar_substrings(ciphertext: str, key_length: int) -> list[str]:
+    # Step (7)
+    ct_length = len(ciphertext)
+    caesar_shifts = []
+    remainder = ct_length % key_length
+    if remainder != 0:
+        ciphertext += " " * remainder  # padding for shorter substrings
+    number_of_full_substrings = round_up(ct_length / key_length)
+    for i in range(key_length):  # for each caesar shift ...
+        substring = ""
+        for j in range(number_of_full_substrings):  # ... get the ciphertext for that shift
+            letter = ciphertext[j * key_length: j * key_length + key_length][i]
+            substring += letter
+        caesar_shifts.append(substring)
+    return caesar_shifts
+
+
