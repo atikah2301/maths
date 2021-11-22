@@ -58,3 +58,22 @@ def tabulate_frequencies(counter: Counter, title: str, threshold=1) -> None:
     print(table)
 
 
+def find_key_length(pos_values: list[int]) -> None:
+    # Step (3)
+    diffs_list = []
+    for i in range(len(pos_values)):
+        for j in range(len(pos_values) - 1, i, -1):
+            diffs_list.append(abs(pos_values[j] - pos_values[i]))
+    print(diffs_list)
+
+    # Step (4)
+    gcds_list = []
+    for i in range(len(diffs_list)):
+        for j in range(len(diffs_list) - 1, i, -1):
+            gcds_list.append(gcd(diffs_list[j], diffs_list[i]))
+
+    # Step (5)
+    gcd_counter = Counter(gcds_list)
+    tabulate_frequencies(gcd_counter, "GCDs", threshold=4)
+
+
