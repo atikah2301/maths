@@ -12,3 +12,9 @@
 # (8) Calculate the Chi Squared stat for each possible shift for each substring
 # (9) Choose the smallest Chi Squared stats, and determine the keys
 # (10) Decrypt and recombine the caesar shift texts to get the Vigenere plaintext
+
+
+from collections import Counter
+from tabulate import tabulate
+from math import ceil as round_up
+
