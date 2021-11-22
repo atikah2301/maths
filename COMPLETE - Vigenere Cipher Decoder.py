@@ -174,3 +174,21 @@ def get_encryption_key(keyword: str) -> str:
     return inverse_keyword
 
 
+def decode_vigenere_ciphertext(substrings: list[str], key: str) -> str:
+    # Step (10)
+    decrypted_substrings = []
+    for i in range(len(key)):
+        shift = english_alphabet.index(key[i])
+        decrypted_substring = apply_caesar_shift(substrings[i], shift)
+        decrypted_substrings.append(decrypted_substring)
+
+    plaintext = ""
+    for j in range(len(decrypted_substrings[0])):
+        for str in decrypted_substrings:
+            if j == len(str):
+                continue
+            plaintext += str[j]
+
+    return plaintext.lower()
+
+
