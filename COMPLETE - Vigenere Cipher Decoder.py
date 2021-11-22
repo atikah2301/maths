@@ -138,3 +138,19 @@ def chi_squared(unshifted_freqs: list[str, int], substring_len: int) -> int:
     return chi_square_sum
 
 
+def get_key_letter(substring: str) -> str:
+    # Step (9)
+    chi_squared_stats = []
+    for i in range(0, len(english_alphabet)):
+        unshifted_substring = undo_caesar_shift(substring, i)
+        letters = get_ngrams(unshifted_substring, n=1)
+        letter_frequency = Counter(letters)
+        chi_square_val = chi_squared(letter_frequency.items(), len(substring))
+        chi_squared_stats.append(chi_square_val)
+
+    chi_squared_pairs = list(zip(english_alphabet, chi_squared_stats))
+    chi_squared_pairs.sort(key=lambda x: x[1])
+    best_fitting_letter, smallest_chi_square = chi_squared_pairs[0]
+    return best_fitting_letter
+
+
