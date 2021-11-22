@@ -124,3 +124,17 @@ def undo_caesar_shift(text: str, n: int) -> str:
     return apply_caesar_shift(text, reverse_shift)
 
 
+def chi_squared(unshifted_freqs: list[str, int], substring_len: int) -> int:
+    # Step (8)
+    expected_letter_counts = dict([(letter, round(freq * substring_len, 4))
+                                   for (letter, freq)
+                                   in english_letters_and_frequencies])
+    chi_square_sum = 0
+    for letter, freq in unshifted_freqs:
+        a = freq
+        e = expected_letter_counts[letter]
+        current_chi_square_value = (a - e) ** 2 / e
+        chi_square_sum += current_chi_square_value
+    return chi_square_sum
+
+
