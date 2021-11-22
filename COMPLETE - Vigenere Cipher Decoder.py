@@ -154,3 +154,23 @@ def get_key_letter(substring: str) -> str:
     return best_fitting_letter
 
 
+def get_decryption_key(substrings: list[str]) -> str:
+    # Step (9)
+    keyword = ""
+    for i in range(len(substrings)):
+        substrings[i] = substrings[i].strip()
+        keyword += get_key_letter(substrings[i])
+    return keyword
+
+
+def get_encryption_key(keyword: str) -> str:
+    # Step (9)
+    n = len(english_alphabet)
+    inverse_keyword = ""
+    for char in keyword:
+        num = english_alphabet.index(char)
+        inverse_letter = english_alphabet[(n - num) % n]
+        inverse_keyword += inverse_letter
+    return inverse_keyword
+
+
