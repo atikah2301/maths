@@ -94,3 +94,17 @@ def get_caesar_substrings(ciphertext: str, key_length: int) -> list[str]:
     return caesar_shifts
 
 
+def apply_caesar_shift(text: str, n: int) -> str:
+    shifted_text = ""
+    n = n % 26
+    for char in text:
+        num = english_alphabet.index(char)
+        shifted_text += english_alphabet[(num + n) % len(english_alphabet)]
+    return shifted_text
+
+
+def undo_caesar_shift(text: str, n: int) -> str:
+    reverse_shift = 26 - n
+    return apply_caesar_shift(text, reverse_shift)
+
+
