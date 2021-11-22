@@ -18,3 +18,7 @@ from collections import Counter
 from tabulate import tabulate
 from math import ceil as round_up
 
+def gcd(a: int, b: int) -> int:
+    while b != 0:
+        a, b = b, a % b
+    return a
