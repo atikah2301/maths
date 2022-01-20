@@ -49,3 +49,18 @@ def tabulate_powers(x: int, n: int, powers_needed: list[int]) -> list[int]:
     print(table)
 
     return pow_x2k_values[1:]
+
+def evaluate_power_map(x: int, e: int, n: int) -> int:
+    powers_needed = get_sum_of_powers_of_2(e)
+    x2k_values = tabulate_powers(x, n, powers_needed)
+    multiplicands = []
+    answer = 1
+    for i in powers_needed:
+        multiplicands.append(x2k_values[i])
+        answer *= x2k_values[i]
+    print(f"{e} is the sum of 2s to the power of {powers_needed}")
+    print(f"{x}^{e} is the product of = {multiplicands} which equals {answer}")
+    print(f"Final answer is {x}^{e} mod {n}, which is {answer % n}")
+    return answer % n
+
+evaluate_power_map(123, 321, 557)
