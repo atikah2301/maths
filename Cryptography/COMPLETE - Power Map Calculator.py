@@ -5,3 +5,7 @@
 # Step 2: Calculate 2^k for all k up to the maximum power needed from step 1
 # Step 3: Calculate x^2^k for all k.. iteratively, by squaring the previous value and reducing mod n
 # Step 4: Multiply together the x^2^k values needed to get x^e and reduce mod n
+
+
+from math import log
+from tabulate import tabulate
