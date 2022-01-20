@@ -29,3 +29,23 @@ def get_sum_of_powers_of_2(e: int) -> list[int]:
         if q == int(q):
             return result
         f = f - 2**int(q)
+
+def tabulate_powers(x: int, n: int, powers_needed: list[int]) -> list[int]:
+    """
+    Takes a list of the powers of 2 needed to sum to e,
+    tabulates 2^k and x^2^k and prints the table
+    returns a list of all x^2^k
+
+    Steps 2 and 3 of evaluating a power map.
+    """
+    k_values = [i for i in range(powers_needed[0]+1)]
+    pow_2k_values = [2**k for k in k_values]
+    pow_x2k_values = [(x**(2**k))%n for k in k_values]
+
+    k_values.insert(0, "k")
+    pow_2k_values.insert(0, "2^k")
+    pow_x2k_values.insert(0, "x^2^k mod n")
+    table = tabulate([k_values, pow_2k_values, pow_x2k_values])
+    print(table)
+
+    return pow_x2k_values[1:]
