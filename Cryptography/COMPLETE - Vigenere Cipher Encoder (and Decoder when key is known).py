@@ -33,3 +33,31 @@ def extend_keyword(keyword: str, length: int) -> str:
         new_keyword += keyword
     new_keyword += keyword[:extra]
     return new_keyword
+
+def vigenre_encoder(text: str, keyword: str) -> str:
+    """Encodes the plaintext by applying shifts to the letters based on the key. Returns ciphertext."""
+    plaintext = text.lower().replace(" ","").replace(".","").replace(",","")
+    full_keyword = extend_keyword(keyword, len(plaintext))
+    key = convert_text_to_indices(full_keyword)
+    num_plaintext = convert_text_to_indices(plaintext)
+
+    num_ciphertext = []
+    for i in range(len(plaintext)):
+        num_ciphertext.append((num_plaintext[i] + key[i]) % 26)
+
+    ciphertext = convert_indices_to_text(num_ciphertext)
+    return ciphertext.upper()
+
+def vigenre_decoder(ciphertext: str, keyword: str) -> str:
+    """Encodes the plaintext by applying shifts to the letters based on the key. Returns ciphertext."""
+    full_keyword = extend_keyword(keyword, len(ciphertext))
+    key = convert_text_to_indices(full_keyword)
+    num_ciphertext = convert_text_to_indices(ciphertext)
+
+    num_plaintext = []
+    for i in range(len(ciphertext)):
+        num_plaintext.append((num_ciphertext[i] - key[i]) % 26)
+
+    plaintext = convert_indices_to_text(num_plaintext)
+    return plaintext
+
