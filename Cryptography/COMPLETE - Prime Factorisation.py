@@ -34,3 +34,5 @@ def prime_factorisation(n):
         if power_product(factors) == original_n:
             return factors
 
+#n = 71171171 * 2
+print(prime_factorisation(n))
