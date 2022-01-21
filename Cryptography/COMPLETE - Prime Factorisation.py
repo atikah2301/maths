@@ -8,7 +8,7 @@ def power_product(n: list) -> int:
         product *= base**exp
     return product
 
-def prime_factorisation(n):
+def prime_factorisation(n: int) -> list:
     original_n = n
     factors = []
     # Extract any factors of 2
