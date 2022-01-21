@@ -89,7 +89,7 @@ def key_composer(*keywords: str) -> str:
     return new_key.lower()
 
 print(vigenre_encoder("hello My Name is Atikah..,", "hi", "hey"))
-print(vigenre_decoder("OMSTVUFVHULQZIAQRIO", "hi"))
-print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "omfplg"))
-print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "hi", "hey"))
+print(vigenre_decoder("OMSTVUFVHULQZIAQRIO", "hi")) # plaintext composed once
+print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "omfplg")) # plaintext composed twice, and decoded with a composed keyword
+print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "hi", "hey")) # plaintext composed twice, and decoded one at a time
 print(key_composer("hi", "hey"))
