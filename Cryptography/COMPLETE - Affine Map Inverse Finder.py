@@ -26,7 +26,7 @@ def find_multiplicative_inverse(a,n):
         else:
             k=k+1  
 
-def affine_map_inverse(a,b,n):
+def affine_map_inverse(a=1,b=0,n=26):
   """
   For a given affine map, find its inverse, a' and b'
   """
@@ -37,5 +37,5 @@ def affine_map_inverse(a,b,n):
   else:
     print(f"This affine map for a={a} and b={b} is invertible for n={n}")
 
-affine_map_inverse(5,3,27)
+affine_map_inverse(a=5,b=4,n=17)
 
