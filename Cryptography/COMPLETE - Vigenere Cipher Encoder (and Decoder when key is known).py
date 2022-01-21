@@ -23,3 +23,13 @@ def caesar_shift_single(char: str, shift: int) -> str:
     """Shifts a single letter"""
     start_pos = convert_text_to_indices(char)
     return convert_indices_to_text([start_pos+shift])
+
+def extend_keyword(keyword: str, length: int) -> str:
+    """Takes a keyword, and repeats it until a desired length is reached"""
+    new_keyword = ""
+    full_repeats = length//len(keyword) # number of full repeats
+    extra = length % len(keyword)
+    for i in range(full_repeats):
+        new_keyword += keyword
+    new_keyword += keyword[:extra]
+    return new_keyword
