@@ -1,3 +1,5 @@
+from math import lcm
+
 english_alphabet = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -34,8 +36,13 @@ def extend_keyword(keyword: str, length: int) -> str:
     new_keyword += keyword[:extra]
     return new_keyword
 
-def vigenre_encoder(text: str, keyword: str) -> str:
+def vigenre_encoder(text: str, *keywords: str) -> str:
     """Encodes the plaintext by applying shifts to the letters based on the key. Returns ciphertext."""
+    if len(keywords) > 1:
+        keyword = key_composer(*keywords)
+    else:
+        keyword = keywords[0]
+
     plaintext = text.lower().replace(" ","").replace(".","").replace(",","")
     full_keyword = extend_keyword(keyword, len(plaintext))
     key = convert_text_to_indices(full_keyword)
@@ -48,8 +55,13 @@ def vigenre_encoder(text: str, keyword: str) -> str:
     ciphertext = convert_indices_to_text(num_ciphertext)
     return ciphertext.upper()
 
-def vigenre_decoder(ciphertext: str, keyword: str) -> str:
+def vigenre_decoder(ciphertext: str, *keywords: str) -> str:
     """Encodes the plaintext by applying shifts to the letters based on the key. Returns ciphertext."""
+    if len(keywords) > 1:
+        keyword = key_composer(*keywords)
+    else:
+        keyword = keywords[0]
+
     full_keyword = extend_keyword(keyword, len(ciphertext))
     key = convert_text_to_indices(full_keyword)
     num_ciphertext = convert_text_to_indices(ciphertext)
@@ -61,5 +73,23 @@ def vigenre_decoder(ciphertext: str, keyword: str) -> str:
     plaintext = convert_indices_to_text(num_plaintext)
     return plaintext
 
-print(vigenre_encoder("hello My Name is Atikah..,", "hi"))
+# To compose any number of vigenere ciphers, you must compose their keys and apply the new key to the plaintext
+# To compose the keys, calculate their LCM (lowest common multiple), and extend each key to this length
+# Apply each key successively to the plaintext OR
+# Apply each key to each other then to the plaintext
+
+def key_composer(*keywords: str) -> str:
+    keys = [convert_text_to_indices(keyword) for keyword in keywords] # get each key as a list of indices
+    key_lengths = [len(key) for key in keys] # get the length of each key
+    new_key_length = lcm(*key_lengths) # calculate the length of the new key
+    long_keys = [extend_keyword(keyword, new_key_length) for keyword in keywords] # make keys the same length
+    new_key = long_keys[0] # starting with the first key, encode the keys with each other
+    for i in range(len(long_keys)-1):
+        new_key = vigenre_encoder(new_key, long_keys[i+1])
+    return new_key.lower()
+
+print(vigenre_encoder("hello My Name is Atikah..,", "hi", "hey"))
 print(vigenre_decoder("OMSTVUFVHULQZIAQRIO", "hi"))
+print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "omfplg"))
+print(vigenre_decoder("VQQAZSMZFBPOGMYXVGV", "hi", "hey"))
+print(key_composer("hi", "hey"))
