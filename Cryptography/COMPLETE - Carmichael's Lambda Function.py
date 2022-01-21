@@ -5,12 +5,6 @@
 from math import sqrt
 from math import lcm
 
-def carmichael(n: list) -> int:
-    """
-    n: list of tuples of integers, representing the prime factorisation of n
-    so for 819 we'd have n=[(3,2),(7,1),(13,1)]
-    where the first number in the tuple is the base, and second is the exponent
-    """
 
 def power_product(n: list) -> int:
     """Takes as input a list of pairs of integers,
@@ -46,3 +40,19 @@ def prime_factorisation(n: int) -> list:
         if power_product(factors) == original_n:
             return factors
 
+def carmichael_aux(p: int, k: int) -> int:
+    """Returns the lambda vale for a prime factor and its exponent"""
+    if p == 2:
+        if k == 1: return 1
+        if k == 2: return 2
+        if k >= 3: return 2**(k-2)
+    if p > 2: return (p**k)-(p**(k-1))
+
+def carmichael(n: int) -> int:
+    factors = prime_factorisation(n)
+    lambda_singles = []
+    for p, k in factors:
+        lambda_singles.append(carmichael_aux(p, k))
+    return lcm(*lambda_singles)
+
+print(carmichael(100))
