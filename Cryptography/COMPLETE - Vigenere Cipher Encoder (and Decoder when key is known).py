@@ -18,3 +18,8 @@ def convert_indices_to_text(indices: list[int]) -> str:
     for i in indices:
         text += int_to_char[i]
     return text.lower()
+
+def caesar_shift_single(char: str, shift: int) -> str:
+    """Shifts a single letter"""
+    start_pos = convert_text_to_indices(char)
+    return convert_indices_to_text([start_pos+shift])
