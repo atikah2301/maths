@@ -61,3 +61,5 @@ def vigenre_decoder(ciphertext: str, keyword: str) -> str:
     plaintext = convert_indices_to_text(num_plaintext)
     return plaintext
 
+print(vigenre_encoder("hello My Name is Atikah..,", "hi"))
+print(vigenre_decoder("OMSTVUFVHULQZIAQRIO", "hi"))
